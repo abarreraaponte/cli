@@ -6,7 +6,7 @@ The client walks, hashes, and uploads. It does not parse, embed, run SQL, or dec
 
 ## Vision repository
 
-Product vision, architecture, and decisions live in the private repository `contextdrive/vision`, on branch `main`. Read `PRODUCT_VISION.md` and `ARCHITECTURE.md` there before designing or implementing. This repository does not keep a product vision. Do not add one. The upload contract is `ARCHITECTURE.md`: a pending file row, then an upload grant for that key, then a commit. Customer-owned buckets are out. If a note in this repository disagrees with the vision repository, the vision repository wins.
+Product vision, architecture, and decisions live in the private repository `contextdrive/vision`, on branch `main`. Read `PRODUCT_VISION.md` and `ARCHITECTURE.md` there before designing or implementing. This repository does not keep a product vision. Do not add one. The upload contract is `ARCHITECTURE.md`: a pending file row, then an upload grant for that key, then a commit. Customer-owned buckets are out. If a note or an issue in this repository disagrees with the vision repository on product behavior, the vision repository wins and that note or issue is updated. When the vision repository is what needs to change, edit it on `main` after the user agrees.
 
 Reach `contextdrive/vision` in this order:
 
