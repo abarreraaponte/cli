@@ -1,8 +1,8 @@
-# contextdrive-cli
+# ctx
 
-This repository is `ctx`, the ContextDrive command-line client. v1 commands are `ctx login`, `ctx ingest`, and `ctx status`. `ctx` is Java, a GraalVM native image, and it does not link DuckDB or Tika. The sample on `main` is not the template for login, ingest, or status.
+This repository is `ctx`, the ContextDrive client. It runs on the caller's machine. v1 commands are `ctx login`, `ctx ingest`, and `ctx status`. `ctx` is Rust, a native binary, and it does not link DuckDB or Tika. The crate is the template: the commands parse, and the work they call is not built yet.
 
-The client walks, hashes, and uploads. It does not parse, embed, run SQL, or decide policy. It asks `server` for a file row and a short-lived upload grant, writes bytes straight to R2, and commits. Embedding and parse run in `server` after the commit. This client does not accept a customer bucket.
+The client walks, hashes, and uploads. It does not parse, embed, run SQL, or decide policy. It asks `server` for a file row and a short-lived upload grant, writes bytes to the endpoint on that grant, and commits. Embedding and parse run in `server` after the commit. This client does not accept a customer bucket.
 
 ## Vision repository
 
@@ -24,6 +24,6 @@ gh api repos/contextdrive/vision/contents/ARCHITECTURE.md?ref=main --jq .content
 
 Read `LOCAL.md` at this repository root when it exists. The file is optional and gitignored. It instructs agents about this machine only: local paths, local tools, and workflows that stay on this computer. Follow it for work in this checkout. Another checkout has its own file, or none. Create `LOCAL.md` only when asked. Leave its contents out of committed files, issues, and pull requests. Product behavior stays in `contextdrive/vision` on `main`. That repository’s `AGENTS.md` records the convention.
 
-## Packages
+## Layout
 
-The sample on `main` is `io.contextdrive.GreetingCommand`. Real commands live in `io.contextdrive.cli`. Each GitHub issue in this repository is one command. Do not take on server work (storage SPI, parsers, workers, policy) in a CLI change.
+`cli` parses arguments. `api` calls `server`. `config` names the credential file under the user config directory. A command calls those modules. It does not own the walk, the hash, or the upload. Debug output redacts the bearer token. Each GitHub issue in this repository is one command. Do not take on server work (storage, parsers, workers, policy) in a `ctx` change.
