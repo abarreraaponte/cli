@@ -4,6 +4,21 @@ This repository is `ctx`, the ContextDrive client. It runs on the caller's machi
 
 The client walks, hashes, and uploads. It does not parse, embed, run SQL, or decide policy. It asks `server` for a file row and a short-lived upload grant, writes bytes to the endpoint on that grant, and commits. Embedding and parse run in `server` after the commit. This client does not accept a customer bucket.
 
+## Repositories
+
+Eight repositories. The same list is `ARCHITECTURE.md` section 10.
+
+| Repo | Purpose |
+| --- | --- |
+| `vision` | Product vision, architecture, decisions, and brand. Markdown and assets only. |
+| `web` | `contextdrive.io`. The public site and the docs. No auth, no database, no product records, and no drive UI. |
+| `console` | `console.contextdrive.io`. The drive UI. A client-only SPA. |
+| `server` | `api.contextdrive.io`. Java. Product records, policy, catalog, files, and audit. |
+| `id` | `id.contextdrive.io`. Identity. Passwords, sessions, and tokens. No product records. |
+| `ctx` | The client on the caller's machine. Rust. |
+| `devops` | Bootstrap and deploy for a location. Terraform and Kamal. The server still creates each organization bucket. |
+| `packages` | npm packages a function imports. `@contextdrive/drive` calls the API for files and a `.ctxdb`. A connector speaks to one outside system. Neither owns the allow. |
+
 ## Vision repository
 
 Product vision, architecture, and decisions live in the private repository `contextdrive/vision`, on branch `main`. Read `PRODUCT_VISION.md` and `ARCHITECTURE.md` there before designing or implementing. This repository does not keep a product vision. Do not add one. The upload contract is `ARCHITECTURE.md`: a pending file row, then an upload grant for that key, then a commit. Customer-owned buckets are out. If a note or an issue in this repository disagrees with the vision repository on product behavior, the vision repository wins and that note or issue is updated. When the vision repository is what needs to change, edit it on `main` after the user agrees.
